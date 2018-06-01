@@ -24,8 +24,23 @@
 }
     </style>
   </head>
-  <body>
+  <body onload="$('.navbar-primary').toggleClass('collapsed')">
   <div class="container"> 
+    <script>
+      $('.btn-expand-collapse').click(function(e) {
+				$('.navbar-primary').toggleClass('collapsed');
+      });</script>
+<nav class="navbar-primary">
+  <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"></span></a>
+  <ul class="navbar-primary-menu">
+    <li>
+      <a href="#home"><span class="nav-label">Homepage</span></a>
+      <a href="#about"><span class="nav-label">About Us</span></a>
+      <a href="#bplan"><span class="nav-label">Our Business Plan</span></a>
+      <a href="#"><span class="nav-label">Our Flavors</span></a>
+    </li>
+  </ul>
+</nav>
     <div class="bg-img">
     </div>
     <div class="bg-content" style="color: white">
