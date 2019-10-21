@@ -6,7 +6,7 @@
      </head>
      <body>
           <p id="tst"> </p>
-          <p>Bit Length: </p><p id="value">3</p>
+          <p>Bit Length: </p><p id="value">15</p>
          <input type="range" id="bits" min="3" max="24" step="3" default="3" oninput="sliderChange(this.value)" />
           <p>Select a file: </p><input type="file" id="pic"><br>
           <textarea name="hex" readonly>
@@ -21,7 +21,7 @@ function sliderChange() {
               document.getElementById('pic').onchange= function() {
                    var file = document.getElementById('pic').files[0];
                         var image = new Image(file);
-                        document.getElementById("tst").innerHTML = image.height + "x" + image.width;
+                        document.getElementById("tst").innerHTML = image.height.toString() + "x" + image.width.toString();
                    
                    
               }
