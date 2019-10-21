@@ -5,7 +5,23 @@
      </head>
      <body>
          <p>hi</p>
-         <p>Bit Length</p><input type="range" name="bits">
-         <p>Select a file: </p><input type="image" name="pic">
+          <p>Bit Length: </p><p id="value"> </p>
+         <input type="range" id="bits" min="3" max="24" step="3">
+         <script>
+              var slider = document.getElementById('bits');
+slider.addEventListener('input', sliderChange);
+
+function sliderChange() {
+  document.getElementById("value").innerHTML = this.value;
+}
+window.onLoad = function() {
+   init();
+   document.getElementById("value").innerHTML = document.getElementById("bits").value;
+}
+          </script>
+         <p>Select a file: </p><input type="file" name="pic">
+         <br>
+         <br>
+         <textarea name="hex" readonly>
      </body>
  </html>
