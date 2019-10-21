@@ -19,10 +19,7 @@ function sliderChange() {
   document.getElementById("value").innerHTML = this.value;
 }
               document.getElementById('pic').onchange= function() {
-                   if(File.type != image/png) {
-                        cleartimeout()
-                        stop();
-                   }
+                   var file = document.getElementById('pic').files[0];
                         var image = new Image(file);
                         document.getElementById("tst").innerHTML = image.height + "x" + image.width;
                    
