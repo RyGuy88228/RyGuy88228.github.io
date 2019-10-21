@@ -5,9 +5,10 @@
          <link rel="icon" type="image/png" href="/csphexbuilder/president-barack-obama-square_32x32.png" />
      </head>
      <body>
+          <p id="tst"> </p>
           <p>Bit Length: </p><p id="value">3</p>
          <input type="range" id="bits" min="3" max="24" step="3" default="3" oninput="sliderChange(this.value)" />
-          <p>Select a file: </p><input type="file" id="pic">
+          <p>Select a file: </p><input type="file" id="pic"><br>
           <textarea name="hex" readonly>
           </textarea>
          <script>
@@ -22,6 +23,10 @@ function sliderChange() {
                         cleartimeout()
                         stop();
                    }
+                        var image = new Image(file);
+                        document.getElementById("tst").innerHTML = image.height + "x" + image.width;
+                   
+                   
               }
           </script>
          <br>
