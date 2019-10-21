@@ -2,11 +2,14 @@
 <html>
      <head>
          <title>CSP Hex IMG Building</title>
-         <link rel="icon" type="image/png" href="/president-barack-obama-square_32x32.png" />
+         <link rel="icon" type="image/png" href="/csphexbuilder/president-barack-obama-square_32x32.png" />
      </head>
      <body>
           <p>Bit Length: </p><p id="value">3</p>
-         <input type="range" id="bits" min="3" max="24" step="3" default="3" oninput="sliderChange(this.value)">
+         <input type="range" id="bits" min="3" max="24" step="3" default="3" oninput="sliderChange(this.value)" />
+          <p>Select a file: </p><input type="file" id="pic">
+          <textarea name="hex" readonly>
+          </textarea>
          <script>
               var slider = document.getElementById('bits');
 slider.addEventListener('input', sliderChange);
@@ -14,15 +17,14 @@ slider.addEventListener('input', sliderChange);
 function sliderChange() {
   document.getElementById("value").innerHTML = this.value;
 }
-window.onLoad = function() {
-   init();
-   document.getElementById("value").innerHTML = document.getElementById("bits").value;
-}
+              document.getElementById('pic').onchange= function() {
+                   if(File.type != image/png) {
+                        cleartimeout()
+                        stop();
+                   }
+              }
           </script>
-         <p>Select a file: </p><input type="file" name="pic">
          <br>
-         <br>
-         <textarea name="hex" readonly>
-          </textarea>
+         <br
      </body>
  </html>
