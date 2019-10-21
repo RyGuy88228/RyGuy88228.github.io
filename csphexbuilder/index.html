@@ -6,7 +6,7 @@
      <body>
          <p>hi</p>
           <p>Bit Length: </p><p id="value"> </p>
-         <input type="range" id="bits" min="3" max="24" step="3">
+         <input type="range" id="bits" min="3" max="24" step="3" oninput="sliderChange(this.value)">
          <script>
               var slider = document.getElementById('bits');
 slider.addEventListener('input', sliderChange);
