@@ -21,7 +21,8 @@ function sliderChange() {
               document.getElementById('pic').onchange= function() {
                    var file = document.getElementById('pic').files[0];
                         var image = new Image(file);
-                        document.getElementById("tst").innerHTML = image.height.toString() + "x" + image.width.toString();
+                        document.getElementById("tst").innerHTML = image.height.value.toString() + "x" + image.width.value.toString();
+                   
                    
                    
               }
