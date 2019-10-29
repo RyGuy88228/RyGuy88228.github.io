@@ -17,15 +17,39 @@ slider.addEventListener('input', sliderChange);
 
 function sliderChange() {
   document.getElementById("value").innerHTML = this.value;
-}
+}/*
               document.getElementById('pic').onchange= function() {
                    var file = document.getElementById('pic').files[0];
                         var image = new Image(file);
                         document.getElementById("tst").innerHTML = image.height.value.toString() + "x" + image.width.value.toString();
                    
                    
-                   
+                   */
+              function getDataUri(url, callback) {
+    var image = new Image();
+
+    image.onload = function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+        canvas.getContext('2d').drawImage(this, 0, 0);
+
+        // Get raw image data
+        callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+
+        // ... or get as Data URI
+        callback(canvas.toDataURL('image/png'));
+    };
+
+    image.src = url;
+}
+              document.getElementById('pic').onchange = function() {
+                   var file = document.getElementById('pic').files[0];
+                   getDataUri(file, function(data) {
+                        document.getElementById('hex').innerHTML = data;
               }
+                              }
           </script>
          <br>
          <br
