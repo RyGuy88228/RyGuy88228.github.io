@@ -1,6 +1,5 @@
 
-    $("#menu-toggle").on('click', function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
+    function toggleBar() {
+        $("#wrapper").toggleClass("toggled");
+    }
 
