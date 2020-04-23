@@ -37,7 +37,7 @@
     </head>
     <body>
       <!--Sidebar-->
-      <div class="d-flex" id="wrapper">
+      <div class="d-flex toggled" id="wrapper">
 
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
@@ -56,12 +56,17 @@
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
+      <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+          <div class="container-fluid">
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle" onclick="toggleBar()">
+            <button class="btn btn-primary" id="menu-toggle" onclick="toggleBar()">
           <span class="navbar-toggler-icon"></span>
         </button>
 
+        </div>
+    </nav>
+</div>
       <div class="container-fluid">
       <!-- Page Content -->
       <h1 class="header">Helping Hands</h1>
