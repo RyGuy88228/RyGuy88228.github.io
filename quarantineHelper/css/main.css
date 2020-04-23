@@ -1,7 +1,7 @@
 .wrapper {
-    display: flex;
-    width: 100%;
+    display: block;
 }
+
 #sidebar {
     min-width: 250px;
     max-width: 250px;
@@ -9,23 +9,10 @@
     position: fixed;
     top: 0;
     left: 0;
+    /* top layer */
     z-index: 9999;
-    transition: all 0.5s;
 }
-#sidebar.active {
-    margin-left: -250px;
-}
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -250px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
-}
-a[data-toggle="collapse"] {
-    position: relative;
-}
+
 .overlay {
     display: none;
     position: fixed;
@@ -53,12 +40,4 @@ a[data-toggle="collapse"] {
     /* top right corner of the sidebar */
     top: 10px;
     right: 10px;
-}
-
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
 }
