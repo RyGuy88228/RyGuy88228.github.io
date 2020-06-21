@@ -35,7 +35,7 @@
         }
         function calcHealth() {
           //health = (20 + 8 * amount of steak) / (1 - damage reduction)
-          var extraHealth;
+          var extraHealth = 0;
           extraHealth += getInt("steak")*8;
           console.log("Steak HP: " + getInt("steak")*8);
           extraHealth += getInt("pots")*getPotVal(getInt("potlevel"));
