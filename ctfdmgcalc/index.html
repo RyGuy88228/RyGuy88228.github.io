@@ -3,9 +3,207 @@
     <head>
       <title>CTF Damage Calculator</title>
       <link rel="icon" type="image/png" href="https://ryguy88228.github.io/ctfdmgcalc/img/icon.png" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
+      <script>
+        $("#reductdiv").on("change", "input", function () {
+          document.getElementById("reduct").value = calcReduct();
+        });
+        $("#healthdiv").on("change", "input", function () {
+          document.getElementById("ehealth").value = calcHealth();
+        });
+        function calcReduct() {
+          //(1-armor reduction)*(1-enchantment reduction)=(1-total reduction)
+          //total reduction + (1-armor reduction)*(1-enchantment reduction) = 1;
+          //total reduction = 1 - (1-armor reduction)*(1-enchantment reduction)
+          if(getEPFPts() = 0) {
+            return (1-(1 - getArmorPoints()) + getResistanceReduction()) + "%";
+          }else {
+            var minValue = 1 - (1-getArmorPoints())*(1-getMinEPF());
+            var maxValue = 1 - (1-getArmorPoints())*(1-getMaxEPF());
+            return minValue + "% - " + maxValue + "%";
+          }
+        }
+        function calcHealth() {
+          //health = (20 + 8 * amount of steak) / (1 - damage reduction)
+          var extraHealth;
+          extraHealth += getInt("steak")*8;
+          extraHealth += getInt("pots")*getPotVal(getInt("potlevel"));
+          if(calcReduct().includes("-")) {
+             let obj = calcReduct().substring(0, calcReduct().length - 1).split("% - ");
+             var min = (20 + extraHealth) / (1 - obj[0]);
+             var max = (20 + extraHealth) / (1 - obj[1]);
+             return min + " - " + max;
+          }else {
+            return (20 + extraHealth) / (1 - calcReduct());
+          }
+        }
+        //Effective Health Stuff
+        function getPotVal(strength) {
+          switch(strength) {
+            case 1:
+              return 4;
+              break;
+            case 2:
+              return 7;
+              break;
+            case 3:
+              return 16;
+              break;
+            default:
+              return 0;
+          }
+        }
+        //Damage reduction stuff
+        function getEPFPts() {
+          var helmProt = getInt("helmprot");
+          var chestProt = getInt("chestprot");
+          var legProt = getInt("legprot");
+          var bootProt = getInt("bootprot");
+          var totalProt = helmProt + chestProt + legProt + bootProt;
+          if(totalProt > 25) totalProt = 25;
+          return totalProt();
+        }
+        function getMaxEPF() {
+          var result = getEPFPts();
+          if(result > 20) result = 20;
+          return result;
+        }
+        function getMinEPF() {
+          var result = getEPFPts() * .5;
+          if(result > 20) result = 20;
+          return result;
+        }
+        function getResistanceReduction() {
+          return getInt("resistance")*20;
+        }
+        function getTotalPoints() {
+          let points = 0;
+          
+          var helmItem = document.getElementById("helm");
+          var helm = helmItem.options[helmItem.selectedIndex].value.toLowerCase();
+          points += getPoints(helm, "helmet");
+          
+          var legItem = document.getElementById("legs");
+          var legs = legItem.options[legItem.selectedIndex].value.toLowerCase();
+          points += getPoints(legs, "leggings");
+          
+          var chestItem = document.getElementById("chest");
+          var chest = chestItem.options[chestItem.selectedIndex].value.toLowerCase();
+          points += getPoints(chest, "chestplate");
+          
+          var bootItem = document.getElementById("boots");
+          var boots = legItem.options[legItem.selectedIndex].value.toLowerCase();
+          points += getPoints(boots, "boots");
+          
+          return points*4;
+        }
+        function getPoints(piece, type) {
+          if(type.toLowerCase() == "none") return 0;
+          switch(piece) {
+            case "boots":
+              switch(type) {
+                case "leather":
+                  return 1;
+                  break;
+                case "chain":
+                  return 1;
+                  break;
+                case "gold":
+                  return 1;
+                  break;
+                case "iron":
+                  return 2;
+                  break;
+                case "diamond":
+                  return 3;
+                  break;
+                default:
+                  return 0;
+              }
+              break;
+            case "leggings":
+              switch(type) {
+                case "leather":
+                  return 2;
+                  break;
+                case "chain":
+                  return 3;
+                  break;
+                case "gold":
+                  return 4;
+                  break;
+                case "iron":
+                  return 5;
+                  break;
+                case "diamond":
+                  return 6;
+                  break;
+                default:
+                  return 0;
+              }
+              break;
+            case "chestplate":
+              switch(type) {
+                case "leather":
+                  return 3;
+                  break;
+                case "chain":
+                  return 5;
+                  break;
+                case "gold":
+                  return 5;
+                  break;
+                case "iron":
+                  return 6;
+                  break;
+                case "diamond":
+                  return 8;
+                  break;
+                default:
+                  return 0;
+              }
+              break;
+            case "helmet":
+              switch(type) {
+                case "leather":
+                  return 1;
+                  break;
+                case "chain":
+                  return 2;
+                  break;
+                case "gold":
+                  return 2;
+                  break;
+                case "iron":
+                  return 2;
+                  break;
+                case "diamond":
+                  return 3;
+                  break;
+                default:
+                  return 0;
+              }
+              break;
+            default:
+              return 0;
+          }
+        }
+        function calcProt(pts, prot) {
+          if(prot == 0) return pts;
+          
+        }
+        function getInt(id) {
+          if(document.getElementById(id).value == null) {
+            return 0;
+          }else {
+            return parseInt(document.getElementById(id).value);
+          }
+        }
+      </script>
       <h1>CTF Damage Calculator</h1>
+      <p>Coded by RyGuy, thanks to Pai_ for the equations</p>
       <div id="reductdiv">
       <!-- Legacy 
       <label for="legacy">Legacy Values? (Pre 1.9)</label>
@@ -15,11 +213,7 @@
       </select> -->
        <!-- Resistance -->
       <label for="resistance">Resistance Level</label>
-      <input type="number" id="resistance" name="resistance" min="0" max="99">
-      <br>
-       <!-- Damage Multiplier -->
-      <label for="resistance">Damage Multiplier</label>
-      <input type="number" id="resistance" name="resistance" min="0" max="99">
+      <input type="number" id="resistance" name="resistance" min="0" max="99" value="0">
       <br>
       <!-- Armor -->
       <!-- Helm -->
@@ -33,7 +227,7 @@
         <option value="diamond">Diamond</option>
       </select>
       <label for="helmprot">Helmet Protection</label>
-      <input type="number" id="helmprot" name="helmprot" min="0" max="10">
+      <input type="number" id="helmprot" name="helmprot" min="0" max="10" value="0">
       <br>
       <!-- Chestplate -->
       <label for="chest">Chestplate</label>
@@ -46,7 +240,7 @@
         <option value="diamond">Diamond</option>
       </select>
       <label for="chestprot">Chestplate Protection</label>
-      <input type="number" id="chestprot" name="chestprot" min="0" max="10">
+      <input type="number" id="chestprot" name="chestprot" min="0" max="10" value="0">
       <br>
       <!-- Leggings -->
       <label for="legs">Leggings</label>
@@ -59,7 +253,7 @@
         <option value="diamond">Diamond</option>
       </select>
       <label for="legprot">Leggings Protection</label>
-      <input type="number" id="legprot" name="legprot" min="0" max="10">
+      <input type="number" id="legprot" name="legprot" min="0" max="10" value="0">
         <br>
       <!-- Boots -->
       <label for="boots">Boots</label>
@@ -72,22 +266,24 @@
         <option value="diamond">Diamond</option>
       </select>
       <label for="bootprot">Boots Protection</label>
-      <input type="number" id="bootprot" name="bootprot" min="0" max="10">
+      <input type="number" id="bootprot" name="bootprot" min="0" max="10" value="0">
         <br>
       <!-- Result -->
       <h4>Damage Reduction</h4>
-      <textarea id="reduct" name="reduct" rows="1" cols="10"></textarea>
-        <br>
       </div>
+      <textarea id="reduct" name="reduct" rows="1" cols="10"></textarea>
       <div id="healthdiv">
       <h1>Effective Health</h1>
       <!-- Steak -->
       <label for="steak">Steak</label>
-      <input type="number" id="steak" name="steak" min="0" max="10">
+      <input type="number" id="steak" name="steak" min="0" max="10" value="0">
         <br>
-      <!-- Steak -->
+      <!-- Health Pots -->
       <label for="pots">Health Pots</label>
-      <input type="number" id="pots" name="pots" min="0" max="20">
+      <input type="number" id="pots" name="pots" min="0" max="20" value="0">
+        <br>
+      <label for="potlevel">Health Pot Level</label>
+      <input type="number" id="potlevel" name="potlevel" min="0" max="20" value="0">
         <br>
       <!-- Result -->
       <h4>Effective Health</h4>
