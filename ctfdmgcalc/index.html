@@ -26,27 +26,31 @@
           //total reduction + (1-armor reduction)*(1-enchantment reduction) = 1;
           //total reduction = 1 - (1-armor reduction)*(1-enchantment reduction)
           if(getEPFPts() == 0) {
-            console.log("No EPF!");
-            return (1-(1 - getTotalPoints()) + getResistanceReduction())*100 + "%";
+            return (1-(1 - getTotalPoints()) + getResistanceReduction())*100.toFixed(2) + "%";
           }else {
-            console.log("EPF!");
             var minValue = (1 - (1-getTotalPoints())*(1-getMinEPF()) + getResistanceReduction())*100;
             var maxValue = (1 - (1-getTotalPoints())*(1-getMaxEPF()) + getResistanceReduction())*100;
-            return minValue + "% - " + maxValue + "%";
+            return minValue.toFixed(2) + "% - " + maxValue.toFixed(2) + "%";
           }
         }
         function calcHealth() {
           //health = (20 + 8 * amount of steak) / (1 - damage reduction)
           var extraHealth;
           extraHealth += getInt("steak")*8;
+          console.log("Steak HP: " + getInt("steak")*8);
           extraHealth += getInt("pots")*getPotVal(getInt("potlevel"));
+          console.log("Pot Health: " + getInt("pots")*getPotVal(getInt("potlevel"));
+          console.log("Ex Health: " + extraHealth)
           if(calcReduct().includes("-")) {
              let obj = calcReduct().substring(0, calcReduct().length - 1).split("% - ");
              var min = (20 + extraHealth) / (1 - obj[0]);
+            console.log("Min: " + min);
              var max = (20 + extraHealth) / (1 - obj[1]);
+            console.log("Max: " + max);
              return min + " - " + max;
           }else {
             return (20 + extraHealth) / (1 - calcReduct());
+            console.log("No Armor");
           }
         }
         //Effective Health Stuff
@@ -68,28 +72,21 @@
         //Damage reduction stuff
         function getEPFPts() {
           var helmProt = getInt("helmprot");
-          console.log("Helm Prot: " + helmProt);
           var chestProt = getInt("chestprot");
-          console.log("Chest Prot: " + chestProt);
           var legProt = getInt("legprot");
-          console.log("Leg Prot: " + legProt);
           var bootProt = getInt("bootprot");
-          console.log("Boot Prot: " + bootProt);
           var totalProt = helmProt + chestProt + legProt + bootProt;
           if(totalProt > 25) totalProt = 25;
-          console.log("Total Prot: " + totalProt);
           return totalProt;
         }
         function getMaxEPF() {
           var result = getEPFPts();
           if(result > 20) result = 20;
-          console.log("Max: " + result);
           return Math.ceil(result)*0.04;
         }
         function getMinEPF() {
           var result = getEPFPts() * .5;
           if(result > 20) result = 20;
-          console.log("Min: " + result);
           return Math.ceil(result)*0.04;
         }
         function getResistanceReduction() {
