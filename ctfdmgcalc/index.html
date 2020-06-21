@@ -71,7 +71,7 @@
           var bootProt = getInt("bootprot");
           var totalProt = helmProt + chestProt + legProt + bootProt;
           if(totalProt > 25) totalProt = 25;
-          return totalProt();
+          return totalProt;
         }
         function getMaxEPF() {
           var result = getEPFPts();
