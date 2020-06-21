@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>CTF Damage Calculator</title>
+    </head>
+    <body>
+      <h1>CTF Damage Calculator</h1>
+      <div id="reductdiv">
+      <!-- <!-- Legacy -->
+      <label for="legacy">Legacy Values? (Pre 1.9)</label>
+      <select id="legacy" name="cars">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select> -->
+       <!-- Resistance -->
+      <label for="resistance">Resistance Level</label>
+      <input type="number" id="resistance" name="resistance" min="0" max="99">
+       <!-- Damage Multiplier -->
+      <label for="resistance">Damage Multiplier</label>
+      <input type="number" id="resistance" name="resistance" min="0" max="99">
+      <!-- Armor -->
+      <!-- Helm -->
+      <label for="helm">Helmet</label>
+      <select id="helm" name="helm">
+        <option value="leather">Leather</option>
+        <option value="gold">Gold</option>
+        <option value="chain">Chain</option>
+        <option value="iron">Iron</option>
+        <option value="diamond">Diamond</option>
+      </select>
+      <label for="helmprot">Helmet Protection</label>
+      <input type="number" id="helmprot" name="helmprot" min="0" max="10">
+      <!-- Chestplate -->
+      <label for="chest">Chestplate</label>
+      <select id="chest" name="chest">
+        <option value="leather">Leather</option>
+        <option value="gold">Gold</option>
+        <option value="chain">Chain</option>
+        <option value="iron">Iron</option>
+        <option value="diamond">Diamond</option>
+      </select>
+      <label for="chestprot">Chestplate Protection</label>
+      <input type="number" id="chestprot" name="chestprot" min="0" max="10">
+      <!-- Leggings -->
+      <label for="legs">Leggings</label>
+      <select id="legs" name="legs">
+        <option value="leather">Leather</option>
+        <option value="gold">Gold</option>
+        <option value="chain">Chain</option>
+        <option value="iron">Iron</option>
+        <option value="diamond">Diamond</option>
+      </select>
+      <label for="legprot">Leggings Protection</label>
+      <input type="number" id="legprot" name="legprot" min="0" max="10">
+      <!-- Boots -->
+      <label for="boots">Boots</label>
+      <select id="boots" name="boots">
+        <option value="leather">Leather</option>
+        <option value="gold">Gold</option>
+        <option value="chain">Chain</option>
+        <option value="iron">Iron</option>
+        <option value="diamond">Diamond</option>
+      </select>
+      <label for="bootprot">Boots Protection</label>
+      <input type="number" id="bootprot" name="bootprot" min="0" max="10">
+      <!-- Result -->
+      <h4>Damage Reduction</h4>
+      <textarea id="reduct" name="reduct" rows="1" cols="10">
+      </div>
+      <div id="healthdiv">
+      <h1>Effective Health</h1>
+      <!-- Steak -->
+      <label for="steak">Steak</label>
+      <input type="number" id="steak" name="steak" min="0" max="10">
+      <!-- Steak -->
+      <label for="pots">Health Pots</label>
+      <input type="number" id="pots" name="pots" min="0" max="20">
+      <!-- Result -->
+      <h4>Effective Health</h4>
+      </div>
+      <textarea id="ehealth" name="ehealth" rows="1" cols="10">
+   </body>
+ </html>
