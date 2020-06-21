@@ -25,7 +25,7 @@
           //(1-armor reduction)*(1-enchantment reduction)=(1-total reduction)
           //total reduction + (1-armor reduction)*(1-enchantment reduction) = 1;
           //total reduction = 1 - (1-armor reduction)*(1-enchantment reduction)
-          if(getEPFPts() = 0) {
+          if(getEPFPts() == 0) {
             return (1-(1 - getArmorPoints()) + getResistanceReduction()) + "%";
           }else {
             var minValue = 1 - (1-getArmorPoints())*(1-getMinEPF());
