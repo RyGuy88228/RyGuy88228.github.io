@@ -27,11 +27,11 @@
           //total reduction = 1 - (1-armor reduction)*(1-enchantment reduction)
           if(getEPFPts() == 0) {
             console.log("No EPF!");
-            return (1-(1 - getTotalPoints()) + getResistanceReduction()) + "%";
+            return (1-(1 - getTotalPoints()) + getResistanceReduction())*100 + "%";
           }else {
             console.log("EPF!");
-            var minValue = 1 - (1-getTotalPoints())*(1-getMinEPF());
-            var maxValue = 1 - (1-getTotalPoints())*(1-getMaxEPF());
+            var minValue = (1 - (1-getTotalPoints())*(1-getMinEPF()) + getResistanceReduction())*100;
+            var maxValue = (1 - (1-getTotalPoints())*(1-getMaxEPF()) + getResistanceReduction())*100;
             return minValue + "% - " + maxValue + "%";
           }
         }
@@ -84,16 +84,16 @@
           var result = getEPFPts();
           if(result > 20) result = 20;
           console.log("Max: " + result);
-          return result;
+          return Math.ceil(result)*0.04;
         }
         function getMinEPF() {
           var result = getEPFPts() * .5;
           if(result > 20) result = 20;
           console.log("Min: " + result);
-          return result;
+          return Math.ceil(result)*0.04;
         }
         function getResistanceReduction() {
-          return getInt("resistance")*20;
+          return getInt("resistance")*0.2;
         }
         function getTotalPoints() {
           let points = 0;
@@ -114,7 +114,7 @@
           var boots = legItem.options[legItem.selectedIndex].value.toLowerCase();
           points += getPoints("boots", boots);
           
-          return points*4;
+          return points*0.04;
         }
         function getPoints(piece, type) {
           if(type.toLowerCase() == "none") return 0;
