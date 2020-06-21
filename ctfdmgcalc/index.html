@@ -43,14 +43,16 @@
           console.log("Ex Health: " + extraHealth)
           if(calcReduct().includes("-")) {
              let obj = calcReduct().substring(0, calcReduct().length - 1).split("% - ");
+            console.log("obj0: " + obj[0]);
+            console.log("obj1: " + obj[1]);
              var min = (20 + extraHealth) / (1 - obj[0]/100);
             console.log("Min: " + min);
              var max = (20 + extraHealth) / (1 - obj[1]/100);
             console.log("Max: " + max);
              return min.toFixed(2) + " - " + max.toFixed(2);
           }else {
-            return ((20 + extraHealth) / (1 - calcReduct()));
-            console.log("No Armor");
+            console.log("EX: " + extraHealth);
+            return ((20 + extraHealth) / (1 - parseInt(calcReduct())));
           }
         }
         //Effective Health Stuff
