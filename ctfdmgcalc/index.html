@@ -39,7 +39,7 @@
           extraHealth += getInt("steak")*8;
           console.log("Steak HP: " + getInt("steak")*8);
           extraHealth += getInt("pots")*getPotVal(getInt("potlevel"));
-          console.log("Pot Health: " + getInt("pots")*getPotVal(getInt("potlevel"));
+          console.log("Pot Health: " + getInt("pots")*getPotVal(getInt("potlevel")));
           console.log("Ex Health: " + extraHealth)
           if(calcReduct().includes("-")) {
              let obj = calcReduct().substring(0, calcReduct().length - 1).split("% - ");
