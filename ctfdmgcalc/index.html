@@ -8,11 +8,19 @@
     <body>
       <script>
         $("#reductdiv").on("change", "input", function () {
-          document.getElementById("reduct").value = calcReduct();
+          console.log("reduct");
+          updateDmg();
         });
         $("#healthdiv").on("change", "input", function () {
-          document.getElementById("ehealth").value = calcHealth();
+          console.log("health");
+          updateHealth();
         });
+        function updateHealth() {
+          document.getElementById("ehealth").value = calcHealth();
+        }
+        function updateDmg() {
+          document.getElementById("reduct").value = calcReduct();
+        }
         function calcReduct() {
           //(1-armor reduction)*(1-enchantment reduction)=(1-total reduction)
           //total reduction + (1-armor reduction)*(1-enchantment reduction) = 1;
@@ -271,6 +279,7 @@
       <!-- Result -->
       <h4>Damage Reduction</h4>
       </div>
+      <button onclick="updateDmg()">Calculate Reduction</button>
       <textarea id="reduct" name="reduct" rows="1" cols="10"></textarea>
       <div id="healthdiv">
       <h1>Effective Health</h1>
@@ -288,6 +297,7 @@
       <!-- Result -->
       <h4>Effective Health</h4>
       </div>
+      <button onclick="updateHealth()">Calculate Effective Health</button>
         <textarea id="ehealth" name="ehealth" rows="1" cols="10"></textarea>
    </body>
  </html>
