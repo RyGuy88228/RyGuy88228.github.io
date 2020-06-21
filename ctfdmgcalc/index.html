@@ -22,12 +22,6 @@
       <h1>CTF Damage Calculator</h1>
       <p>Coded by RyGuy, thanks to Pai_ for the equations</p>
       <div id="reductdiv">
-      <!-- Legacy 
-      <label for="legacy">Legacy Values? (Pre 1.9)</label>
-      <select id="legacy" name="cars">
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select> -->
        <!-- Resistance -->
       <label for="resistance">Resistance Level</label>
       <input type="number" id="resistance" name="resistance" min="0" max="99" value="0">
@@ -88,7 +82,7 @@
       <!-- Result -->
       <h4>Damage Reduction</h4>
       </div>
-      <!-- <button onclick="updateDmg()">Calculate Reduction</button> -->
+      <button onclick="updateDmg()">Calculate Reduction</button>
       <textarea id="reduct" name="reduct" rows="1" cols="15"></textarea>
       <div id="healthdiv">
       <h1>Effective Health</h1>
@@ -106,7 +100,7 @@
       <!-- Result -->
       <h4>Effective Health</h4>
       </div>
-      <!-- <button onclick="updateHealth()">Calculate Effective Health</button> -->
+       <button onclick="updateHealth()">Calculate Effective Health</button>
         <textarea id="ehealth" name="ehealth" rows="1" cols="15"></textarea>
    </body>
  </html>
