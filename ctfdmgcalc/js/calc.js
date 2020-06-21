@@ -45,7 +45,7 @@
               return 4;
               break;
             case 2:
-              return 7;
+              return 8;
               break;
             case 3:
               return 16;
