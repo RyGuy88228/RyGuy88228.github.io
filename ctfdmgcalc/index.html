@@ -92,19 +92,28 @@
           var helmItem = document.getElementById("helm");
           var helm = helmItem.options[helmItem.selectedIndex].value.toLowerCase();
           points += getPoints(helm, "helmet");
+          console.log("Helm: " + helm);
+          console.log("GP: " + getPoints(helm, "helmet"););
           
           var legItem = document.getElementById("legs");
           var legs = legItem.options[legItem.selectedIndex].value.toLowerCase();
           points += getPoints(legs, "leggings");
+          console.log("Legs: " + legs);
+          console.log("GP: " + getPoints(legs, "leggings"););
           
           var chestItem = document.getElementById("chest");
           var chest = chestItem.options[chestItem.selectedIndex].value.toLowerCase();
           points += getPoints(chest, "chestplate");
+          console.log("Chest: " + chest);
+          console.log("GP: " + getPoints(chest, "chestplate"););
           
           var bootItem = document.getElementById("boots");
           var boots = legItem.options[legItem.selectedIndex].value.toLowerCase();
           points += getPoints(boots, "boots");
+          console.log("Boots: " + boots);
+          console.log("GP: " + getPoints(boots, "boots"););
           
+          console.log("Total: " + points);
           return points*4;
         }
         function getPoints(piece, type) {
