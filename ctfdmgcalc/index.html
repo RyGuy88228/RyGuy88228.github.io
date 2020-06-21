@@ -43,13 +43,13 @@
           console.log("Ex Health: " + extraHealth)
           if(calcReduct().includes("-")) {
              let obj = calcReduct().substring(0, calcReduct().length - 1).split("% - ");
-             var min = (20 + extraHealth) / (1 - obj[0]);
+             var min = (20 + extraHealth) / (1 - obj[0]/100);
             console.log("Min: " + min);
-             var max = (20 + extraHealth) / (1 - obj[1]);
+             var max = (20 + extraHealth) / (1 - obj[1]/100);
             console.log("Max: " + max);
-             return min + " - " + max;
+             return min.toFixed(2) + " - " + max.toFixed(2);
           }else {
-            return (20 + extraHealth) / (1 - calcReduct());
+            return ((20 + extraHealth) / (1 - calcReduct()));
             console.log("No Armor");
           }
         }
@@ -282,7 +282,7 @@
       <h4>Damage Reduction</h4>
       </div>
       <button onclick="updateDmg()">Calculate Reduction</button>
-      <textarea id="reduct" name="reduct" rows="1" cols="10"></textarea>
+      <textarea id="reduct" name="reduct" rows="1" cols="15"></textarea>
       <div id="healthdiv">
       <h1>Effective Health</h1>
       <!-- Steak -->
@@ -300,6 +300,6 @@
       <h4>Effective Health</h4>
       </div>
       <button onclick="updateHealth()">Calculate Effective Health</button>
-        <textarea id="ehealth" name="ehealth" rows="1" cols="10"></textarea>
+        <textarea id="ehealth" name="ehealth" rows="1" cols="15"></textarea>
    </body>
  </html>
