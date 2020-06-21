@@ -25,9 +25,11 @@
           //(1-armor reduction)*(1-enchantment reduction)=(1-total reduction)
           //total reduction + (1-armor reduction)*(1-enchantment reduction) = 1;
           //total reduction = 1 - (1-armor reduction)*(1-enchantment reduction)
-          if(getEPFPts() == 0) {
+          if(getEPFPts() == 0 || getEPFPts().split("% - ").length==1) {
+            console.log("No EPF!");
             return (1-(1 - getTotalPoints()) + getResistanceReduction()) + "%";
           }else {
+            console.log("EPF!");
             var minValue = 1 - (1-getTotalPoints())*(1-getMinEPF());
             var maxValue = 1 - (1-getTotalPoints())*(1-getMaxEPF());
             return minValue + "% - " + maxValue + "%";
@@ -66,21 +68,28 @@
         //Damage reduction stuff
         function getEPFPts() {
           var helmProt = getInt("helmprot");
+          console.log("Helm Prot: " + helmProt);
           var chestProt = getInt("chestprot");
+          console.log("Chest Prot: " + chestProt);
           var legProt = getInt("legprot");
+          console.log("Leg Prot: " + legProt);
           var bootProt = getInt("bootprot");
+          console.log("Boot Prot: " + bootProt);
           var totalProt = helmProt + chestProt + legProt + bootProt;
           if(totalProt > 25) totalProt = 25;
+          console.log("Total Prot: " + totalProt);
           return totalProt;
         }
         function getMaxEPF() {
           var result = getEPFPts();
           if(result > 20) result = 20;
+          console.log("Max: " + result);
           return result;
         }
         function getMinEPF() {
           var result = getEPFPts() * .5;
           if(result > 20) result = 20;
+          console.log("Min: " + min);
           return result;
         }
         function getResistanceReduction() {
@@ -92,28 +101,19 @@
           var helmItem = document.getElementById("helm");
           var helm = helmItem.options[helmItem.selectedIndex].value.toLowerCase();
           points += getPoints("helmet", helm);
-          console.log("Helm: " + helm);
-          console.log("GP: " + getPoints("helmet", helm));
           
           var legItem = document.getElementById("legs");
           var legs = legItem.options[legItem.selectedIndex].value.toLowerCase();
           points += getPoints("leggings", legs);
-          console.log("Legs: " + legs);
-          console.log("GP: " + getPoints("leggings", legs));
           
           var chestItem = document.getElementById("chest");
           var chest = chestItem.options[chestItem.selectedIndex].value.toLowerCase();
           points += getPoints("chestplate", chest);
-          console.log("Chest: " + chest);
-          console.log("GP: " + getPoints("chestplate", chest));
           
           var bootItem = document.getElementById("boots");
           var boots = legItem.options[legItem.selectedIndex].value.toLowerCase();
           points += getPoints("boots", boots);
-          console.log("Boots: " + boots);
-          console.log("GP: " + getPoints("boots", boots));
           
-          console.log("Total: " + points);
           return points*4;
         }
         function getPoints(piece, type) {
@@ -146,10 +146,10 @@
                   return 2;
                   break;
                 case "chain":
-                  return 3;
+                  return 4;
                   break;
                 case "gold":
-                  return 4;
+                  return 3;
                   break;
                 case "iron":
                   return 5;
@@ -206,10 +206,6 @@
             default:
               return 0;
           }
-        }
-        function calcProt(pts, prot) {
-          if(prot == 0) return pts;
-          
         }
         function getInt(id) {
           if(document.getElementById(id).value == null) {
